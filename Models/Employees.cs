@@ -18,5 +18,8 @@ namespace BangazonAPI.Models
         public string LastName { get; set; }
         [Required]
         public bool Supervisor { get; set; }
+
+        List<Employees> EmployeesList = new List<Employees>();
+        public IEnumerable<Employees> Employee;
     }
 }

@@ -8,20 +8,16 @@ namespace BangazonAPI.Models
     public class Orders
     {
         [Key]
-        public int sId { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime DateCreated { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public int CustomersId { get; set; }
         public Customers Customers { get; set; }
-        public int? PaymentTypesId { get; set; } // ? means that the variable can be null
+        public int? PaymentTypesId { get; set; }
         public PaymentTypes PaymentTypes { get; set; }
 
-        public IEnumerable<ProductOrders> ProductOrders;
+        List<ProductOrders> ProductOrdersList = new List<ProductOrders>();
+        public IEnumerable<ProductOrders> ProductOrder;
 
     }
 }
