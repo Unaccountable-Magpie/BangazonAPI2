@@ -22,7 +22,7 @@ namespace BangazonAPI.Models
         public string ProgramName { get; set; }
         public string MaxAttendees { get; set; }
 
-        public List<TrainingPrograms> TrainingProgramsList = new List<TrainingPrograms>();
+        public List<Employees> EmployeesTraining = new List<Employees>();
 
         public IEnumerable<TrainingPrograms> TrainingProgram;
     }
