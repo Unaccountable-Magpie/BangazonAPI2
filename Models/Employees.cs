@@ -11,7 +11,9 @@ namespace BangazonAPI.Models
         public int Id { get; set; }
 
         [Required]
-        public Departments DepartmentsId { get; set; }
+        public int DepartmentsId { get; set; }
+        [Required]
+        public Departments Department { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
