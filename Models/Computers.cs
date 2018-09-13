@@ -22,8 +22,9 @@ namespace BangazonAPI.Models
 
         [Required]
         public Boolean Malfunctioned { get; set; }
+        public List<Computers> ComputersList = new List<Computers>();
 
-        //public IEnumerable<OrderProduct> OrderProducts;
+        public IEnumerable<Computers> Computer;
 
     }
 }

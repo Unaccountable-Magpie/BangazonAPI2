@@ -14,9 +14,10 @@ namespace BangazonAPI.Models
 
         [Required]
         public string Name { get; set; }
+        public List<ProductTypes> ProductTypeList = new List<ProductTypes>();
         
 
-        //public IEnumerable<OrderProduct> OrderProducts;
+        public IEnumerable<ProductTypes> ProductType;
 
     }
 }
