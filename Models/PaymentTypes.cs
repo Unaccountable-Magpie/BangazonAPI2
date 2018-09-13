@@ -13,11 +13,10 @@ namespace BangazonAPI.Models
 
 
         [Required]
-        public int CustomerId { get; set; }
+        public int CustomersId { get; set; }
         public Customers Customer { get; set; }
-        public string Bank { get; set; }
+        public string Name { get; set; }
         public int? AccountNumber { get; set; }
-        public string CardType { get; set; } // ? means that the variable can be null
 
 
     }

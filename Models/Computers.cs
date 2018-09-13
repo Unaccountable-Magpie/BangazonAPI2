@@ -10,15 +10,19 @@ namespace BangazonAPI.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime PurchaseDate { get; set; }
+
+
+
 
         [Required]
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime DecommisssionDate { get; set; }
+        public DateTime DatePurchased { get; set; }
+
+        [DataType(DataType.Date)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? DecommisssionedDate { get; set; }
+        
 
         [Required]
         public Boolean Malfunctioned { get; set; }
