@@ -16,8 +16,7 @@ namespace BangazonAPI.Models
         public int? PaymentTypesId { get; set; }
         public PaymentTypes PaymentTypes { get; set; }
 
-        List<ProductOrders> ProductOrdersList = new List<ProductOrders>();
-        public IEnumerable<ProductOrders> ProductOrder;
+        List<Products> ProductList = new List<Products>();
 
     }
 }

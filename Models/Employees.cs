@@ -19,7 +19,5 @@ namespace BangazonAPI.Models
         [Required]
         public bool Supervisor { get; set; }
 
-        List<Employees> EmployeesList = new List<Employees>();
-        public IEnumerable<Employees> Employee;
     }
 }
