@@ -10,7 +10,7 @@ namespace BangazonAPI.Models
     public class TrainingPrograms
     {
         [Key]
-        public int TrainingProgramsId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
