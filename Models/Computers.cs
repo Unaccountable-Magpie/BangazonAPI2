@@ -23,7 +23,6 @@ namespace BangazonAPI.Models
         [Required]
         public Boolean Malfunctioned { get; set; }
 
-        public IEnumerable<Computers> Computer;
 
     }
 }

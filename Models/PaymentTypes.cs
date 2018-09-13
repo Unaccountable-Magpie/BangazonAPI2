@@ -19,7 +19,6 @@ namespace BangazonAPI.Models
         public int? AccountNumber { get; set; }
         public string CardType { get; set; } // ? means that the variable can be null
 
-        public IEnumerable<PaymentTypes> PaymentType;
 
     }
 }

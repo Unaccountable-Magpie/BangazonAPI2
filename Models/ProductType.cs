@@ -16,7 +16,6 @@ namespace BangazonAPI.Models
         public string Name { get; set; }
         
 
-        public IEnumerable<ProductTypes> ProductType;
 
     }
 }
