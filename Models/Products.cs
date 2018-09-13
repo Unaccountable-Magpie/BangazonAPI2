@@ -22,7 +22,7 @@ namespace BangazonAPI.Models
         public string Title { get; set; } // ? means that the variable can be null
         public string Description { get; set; }
         public int? Quantity { get; set; }
-        public List<Products> ProductList = new List<Products>();
+
         public IEnumerable<Products> Product;
 
     }

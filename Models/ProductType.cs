@@ -14,7 +14,6 @@ namespace BangazonAPI.Models
 
         [Required]
         public string Name { get; set; }
-        public List<ProductTypes> ProductTypeList = new List<ProductTypes>();
         
 
         public IEnumerable<ProductTypes> ProductType;
