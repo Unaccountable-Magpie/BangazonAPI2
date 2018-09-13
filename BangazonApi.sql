@@ -146,7 +146,7 @@ CREATE TABLE EmployeeComputers (
     EmployeesId INTEGER NOT NULL,
     ComputersId INTEGER NOT NULL,
     AssignStartDate DATE NOT NULL,
-    AssignEndDate DATE NOT NULL,
+    AssignEndDate DATE,
     CONSTRAINT FK_Employees FOREIGN KEY(EmployeesId) REFERENCES Employees(Id),
     CONSTRAINT FK_Computers FOREIGN KEY(ComputersId) REFERENCES Computers(Id)
 );
@@ -164,7 +164,7 @@ VALUES
 INSERT INTO EmployeeComputers
 (EmployeesId, ComputersId, AssignStartDate, AssignEndDate)
 VALUES
-(3, 2, '2018-6-17', '2018-4-4');
+(3, 2, '2018-6-17', null);
 
 CREATE TABLE EmployeeTrainingPrograms (
 	 Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -239,7 +239,7 @@ VALUES
 CREATE TABLE Orders (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
 	CustomersId INTEGER NOT NULL,
-	PaymentTypesId INTEGER NOT NULL,
+	PaymentTypesId INTEGER,
      CONSTRAINT FK_CustomerOrders FOREIGN KEY(CustomersId) REFERENCES Customers(Id),
      CONSTRAINT FK_PaymentTypeOrders FOREIGN KEY(PaymentTypesId) REFERENCES PaymentTypes(Id)
 );
