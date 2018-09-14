@@ -14,8 +14,8 @@ namespace BangazonAPI.Models
 
         [Required]
         public int ProductTypeId { get; set; }
-        public ProductTypes ProductId { get; set; }
-        public int CustomersID { get; set; }
+        public ProductTypes ProductTypesId { get; set; }
+        public int CustomersId { get; set; }
         public Customers Customer { get; set; }
         public int Price { get; set; }
         public string Title { get; set; } // ? means that the variable can be null
