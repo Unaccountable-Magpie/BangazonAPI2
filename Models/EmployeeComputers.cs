@@ -17,10 +17,10 @@ namespace BangazonAPI.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime AssignmentStartDate { get; set; }
 
-        [Required]
+        
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime AssignmentEndDate { get; set; }
+        public DateTime? AssignmentEndDate { get; set; }
 
         [Required]
         public int EmployeesId { get; set; }
