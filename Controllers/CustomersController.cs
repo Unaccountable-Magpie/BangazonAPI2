@@ -3,11 +3,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Dapper;
 using Microsoft.AspNetCore.Http;
+using System.Data.SqlClient;
 
 namespace BangazonAPI.Models
 {
@@ -55,19 +55,19 @@ namespace BangazonAPI.Models
             {
                 if (_include == "payments")
                 {
-                    Dictionary<int, Customer> customerPayments = new Dictionary<int, Customer>();
+                    Dictionary<int, Customers> customerPayments = new Dictionary<int, Customers>();
 
-                    var customers = await conn.QueryAsync<Customer, PaymentType, Customer>(
+                    var Allcustomers = await conn.QueryAsync<Customers, PaymentTypes, Customers>(
                         sql,
                         (customer, paymentType) =>
                         {
                             return customer;
                         }
                     );
-                    return Ok(customers.Values);
+                    return Ok(Allcustomers);
 
                 }
-                IEnumerable<Customer> customers = await conn.QueryAsync<Customer>(sql);
+                IEnumerable<Customers> customers = await conn.QueryAsync<Customers>(sql);
                 return Ok(customers);
             }
         }
@@ -80,14 +80,14 @@ namespace BangazonAPI.Models
 
             using (IDbConnection conn = Connection)
             {
-                IEnumerable<Customer> customers = await conn.QueryAsync<Customer>(sql);
+                IEnumerable<Customers> customers = await conn.QueryAsync<Customers>(sql);
                 return Ok(customers);
             }
         }
 
         // POST /customers
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Customer customer)
+        public async Task<IActionResult> Post([FromBody] Customers customer)
         {
             string sql = $@"INSERT INTO Customer
             ()
@@ -117,7 +117,7 @@ namespace BangazonAPI.Models
             verb is handled.
          */
         [HttpPut("{id}")]
-        public async Task<IActionResult> ChangeCustomer(int id, [FromBody] Customer customer)
+        public async Task<IActionResult> ChangeCustomer(int id, [FromBody] Customers customer)
         {
             string sql = $@"
             UPDATE Customer
@@ -172,7 +172,7 @@ namespace BangazonAPI.Models
             string sql = $"SELECT Id, Name, Language FROM Customer WHERE Id = {id}";
             using (IDbConnection conn = Connection)
             {
-                return conn.Query<Customer>(sql).Count() > 0;
+                return conn.Query<Customers>(sql).Count() > 0;
             }
         }
     }
