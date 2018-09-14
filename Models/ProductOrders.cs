@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Author: Austin Gorman
+//Purpose: To reference the ProductOrders table and it's values
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

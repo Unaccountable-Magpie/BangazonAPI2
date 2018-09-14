@@ -1,4 +1,5 @@
-﻿
+﻿//Author: Austin Gorman
+//Purpose: To reference the Departments table and it's values
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

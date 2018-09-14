@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//Author: Austin Gorman
+//Purpose: To reference the Employees table and it's values
+
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BangazonAPI.Models
 {
