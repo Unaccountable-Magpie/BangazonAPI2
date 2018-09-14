@@ -10,7 +10,7 @@ namespace BangazonAPI.Models
     public class EmployeeComputers
     {
         [Key]
-        public int EmployeeComputersId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
