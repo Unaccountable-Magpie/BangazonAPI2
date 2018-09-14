@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Author - Brett Shearin
+// Purpose - Reflects the Products table in the database and its values
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
