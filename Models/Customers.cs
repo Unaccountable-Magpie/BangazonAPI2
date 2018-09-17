@@ -1,10 +1,11 @@
 ﻿
+using BangazonAPI.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BangazonAPI.Controllers
+namespace BangazonAPI.Models
 {
     public class Customers
     {
