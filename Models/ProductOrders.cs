@@ -1,6 +1,10 @@
+<<<<<<< Updated upstream
 ﻿//Author: Austin Gorman
 //Purpose: To reference the ProductOrders table and it's values
 
+=======
+﻿using BangazonAPI.Controllers;
+>>>>>>> Stashed changes
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
