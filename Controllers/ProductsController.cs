@@ -1,31 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
-namespace BangazonAPI.Controllers
+namespace BangazonAPI.Models
 {
-    [Route("api/[controller]")]
+    [Route("api[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly IConfiguration _config;
+
+        public ProductsController(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public IDbConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            }
+        }
+
+
         // GET: api/Products
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+
+            using (IDbConnection conn = Connection)
+            {
+                string sql = "SELECT * FROM Products";
+
+                var ProductsQuery = await conn.QueryAsync<Products>(sql);
+                return Ok(ProductsQuery);
+            }
         }
 
 
 
         // GET: api/Products/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetProducts")]
+        public async Task<IActionResult> Get([FromRoute]int id)
         {
-            return "value";
+
+            using (IDbConnection conn = Connection)
+
+            {
+                string sql = $"SELECT * FROM Products WHERE Id = {id}";
+                var singleProducts = (await conn.QueryAsync<Products>(sql)).Single();
+                return Ok(singleProducts);
+            }
         }
+
 
         // POST: api/Products
         [HttpPost]
