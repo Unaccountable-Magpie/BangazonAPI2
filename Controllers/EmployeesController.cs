@@ -9,7 +9,7 @@ using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BangazonAPI.Controllers
 {
@@ -66,7 +66,8 @@ namespace BangazonAPI.Controllers
             string sql = $@"INSERT INTO Employees
             ( FirstName, LastName, Supervisor, DepartmentsId)
             VALUES
-            ('{Employees.FirstName}','{Employees.LastName}', '{Employees.Supervisor}, '{Employees.DepartmentsId}'');
+            ('{Employees.FirstName}','{Employees.LastName}', '{Employees.Supervisor}', 
+        {Employees.DepartmentsId});
             select MAX(Id) from Employees";
 
             using (IDbConnection conn = Connection)
@@ -77,72 +78,71 @@ namespace BangazonAPI.Controllers
             }
 
         }
-        //// PUT: api/Employees/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Employees Employees)
-        //{
-        //    string sql = $@"
-        //    UPDATE Employees
-        //    SET 
-        //        FirstName = '{Employees.FirstName}',
-        //        LastName = '{Employees.LastName}',
-        //  
-        //        Supervisor = '{Employees.Supervisor}',
-        //     DepartmentsId = '{Employees.DepartmentsId}'
-        //    WHERE Id = {id}";
+        // PUT: api/Employees/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Employees Employees)
+        {
+            string sql = $@"
+            UPDATE Employees
+            SET 
+                DepartmentsId = {Employees.DepartmentsId},
+                FirstName = '{Employees.FirstName}',
+                LastName = '{Employees.LastName}',
+                Supervisor = '{Employees.Supervisor}'
+            WHERE Id = {id}";
 
-        //    try
-        //    {
-        //        using (IDbConnection conn = Connection)
-        //        {
-        //            int rowsAffected = await conn.ExecuteAsync(sql);
-        //            if (rowsAffected > 0)
-        //            {
-        //                return new StatusCodeResult(StatusCodes.Status204NoContent);
-        //            }
-        //            throw new Exception("No rows affected");
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        if (!EmployeesExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //}
-
+            try
+            {
+                using (IDbConnection conn = Connection)
+                {
+                    int rowsAffected = await conn.ExecuteAsync(sql);
+                    if (rowsAffected > 0)
+                    {
+                        return new StatusCodeResult(StatusCodes.Status204NoContent);
+                    }
+                    throw new Exception("No rows affected");
+                }
+            }
+            catch (Exception)
+            {
+                if (!EmployeesExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
 
 
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete([FromRoute] int id)
-        //{
-        //    string sql = $@"DELETE FROM Employees WHERE Id = {id}";
 
-        //    using (IDbConnection conn = Connection)
-        //    {
-        //        int rowsAffected = await conn.ExecuteAsync(sql);
-        //        if (rowsAffected > 0)
-        //        {
-        //            return new StatusCodeResult(StatusCodes.Status204NoContent);
-        //        }
-        //        throw new Exception("No rows affected");
-        //    }
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            string sql = $@"DELETE FROM EmployeeComputers WHERE EmployeesId = {id};
+               DELETE FROM Employees WHERE Id = {id}";
 
-        //}
-        //private bool EmployeesExists(int id)
+            using (IDbConnection conn = Connection)
+            {
+                int rowsAffected = await conn.ExecuteAsync(sql);
+                if (rowsAffected > 0)
+                {
+                    return new StatusCodeResult(StatusCodes.Status204NoContent);
+                }
+                throw new Exception("No rows affected");
+            }
 
-        //{
-        //    string sql = $"SELECT FirstName, LastName, Supervisor, DepartmentsId FROM Employees WHERE Id = {id}";
-        //    using (IDbConnection conn = Connection)
-        //    {
-        //        return conn.Query<Employees>(sql).Count() > 0;
-        //    }
-        //}
+        }
+        private bool EmployeesExists(int id)
+        {
+            string sql = $"SELECT DepartmentsId, FirstName, LastName, Supervisor FROM Employees WHERE Id = {id}";
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<Employees>(sql).Count() > 0;
+            }
+        }
     }
 }
