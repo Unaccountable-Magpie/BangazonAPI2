@@ -45,7 +45,7 @@ namespace BangazonAPI.Controllers
         }
 
         // GET: api/Orders/5
-        [HttpGet("{id}", Name = "GetExercise")]
+        [HttpGet("{id}", Name = "GetOrders")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             using (IDbConnection conn = Connection)
@@ -62,9 +62,9 @@ namespace BangazonAPI.Controllers
         public async Task<IActionResult> Post([FromBody] Orders orders)
         {
             string sql = $@"INSERT INTO Orders
-            (CustomersId, Customers, PaymentTypesId, PaymentTypes)
+            (CustomersId, PaymentTypesId)
             VALUES
-            ('{orders.CustomersId}', '{orders.Customers}', '{orders.PaymentTypesId}', '{orders.PaymentTypes}');
+            ('{orders.CustomersId}',  '{orders.PaymentTypesId}');
             select MAX(Id) from Orders";
 
             using (IDbConnection conn = Connection)
@@ -81,9 +81,9 @@ namespace BangazonAPI.Controllers
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Orders orders)
         {
             string sql = $@"
-            UPDATE Exercise
-            SET Customers = '{orders.Customers}',
-                PaymentTypes = '{orders.PaymentTypes}'
+            UPDATE Orders
+            SET CustomersId = {orders.CustomersId},
+                PaymentTypesId = {orders.PaymentTypesId}
             WHERE Id = {id}";
 
             try
@@ -113,8 +113,30 @@ namespace BangazonAPI.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            string sql = $@"DELETE FROM ProductOrders WHERE OrdersId = {id} ;
+                            DELETE FROM Orders WHERE Id = {id}";
+
+            using (IDbConnection conn = Connection)
+            {
+                int rowsAffected = await conn.ExecuteAsync(sql);
+                if (rowsAffected > 0)
+                {
+                    return new StatusCodeResult(StatusCodes.Status204NoContent);
+                }
+                throw new Exception("No rows affected");
+            }
+
+        }
+
+        private bool OrdersExists(int id)
+        {
+            string sql = $"SELECT CustomersId, PaymentTypesId FROM Orders WHERE Id = {id}";
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<Orders>(sql).Count() > 0;
+            }
         }
     }
 }
