@@ -113,6 +113,7 @@ namespace BangazonAPI.Controllers
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
             string sql = $@"DELETE From ProductTypes WHERE Id = {id}";
+
             using (IDbConnection conn = Connection)
             {
                 int rowsAffected = await conn.ExecuteAsync(sql);
