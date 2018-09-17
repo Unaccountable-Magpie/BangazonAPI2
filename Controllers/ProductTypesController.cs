@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*Purpose: Allows user to Get information stored inside the ProductTypes table,
+        Allows user to Post new information to the table with a new ProductTypes Id,
+        Allows user to Put or update a ProductTypes Name by the associated Id,
+        Allows user to Delete a ProductTypes Name by the associated Id from the ProductTypes table*/
+//Author: Amanda Mitchell
+//Models: ProductTypes
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;

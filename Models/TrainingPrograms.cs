@@ -1,5 +1,6 @@
-﻿//Purpose: refrences the TrainingPrograms table in the database. Gets and Sets data that the associated 
-// controller will be able to access and use to make the program run.
+﻿/*Purpose: refrences the TrainingPrograms table in the database. Gets and Sets data that the associated 
+controller will be able to access and use to make the program run.*/
+//Author: Amanda Mitchell
 
 using System;
 using System.Collections.Generic;
