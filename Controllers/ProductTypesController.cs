@@ -76,7 +76,7 @@ namespace BangazonAPI.Controllers
 
         // PUT: api/ProductTypes/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute]int id,  ProductTypes ProductTypes)
+        public async Task<IActionResult> Put([FromRoute]int id,  [FromBody]ProductTypes ProductTypes)
         {
             string sql = $@"
             UPDATE ProductTypes
@@ -99,15 +99,39 @@ namespace BangazonAPI.Controllers
             {
                 if (!PaymentTypesExists(id))
                 {
-
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
                 }
             }
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute]int id)
         {
+            string sql = $@"DELETE From ProductTypes WHERE Id = {id}";
+            using (IDbConnection conn = Connection)
+            {
+                int rowsAffected = await conn.ExecuteAsync(sql);
+                if (rowsAffected > 0)
+                {
+                    return new StatusCodeResult(StatusCodes.Status204NoContent);
+                }
+                throw new Exception("No rows affected");
+            }
+        }
+
+        private bool PaymentTypesExists(int id)
+        {
+            string sql = $"SELECT Id, Name FROM ProductTypes WHERE Id = {id}";
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<PaymentTypes>(sql).Count() > 0;
+            }
         }
     }
 }
+
