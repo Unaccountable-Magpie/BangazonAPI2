@@ -9,7 +9,7 @@ using Dapper;
 using Microsoft.AspNetCore.Http;
 using System.Data.SqlClient;
 
-namespace BangazonAPI.Models
+namespace BangazonAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
