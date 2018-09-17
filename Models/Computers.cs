@@ -12,24 +12,23 @@ namespace BangazonAPI.Models
 {
     public class Computers
     {
-        [Key]
+       
         public int Id { get; set; }
 
 
 
 
 
-        [Required]
-        [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        
+        
+        
         public DateTime DatePurchased { get; set; }
 
-        [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+       
         public DateTime? DecommisssionedDate { get; set; }
         
 
-        [Required]
+        
         public Boolean Malfunctioned { get; set; }
 
 

@@ -13,12 +13,9 @@ namespace BangazonAPI.Models
 {
     public class Products
     {
-        [Key]
-        public int Id { get; set; }
-
         
-
-        [Required]
+        public int Id { get; set; }
+        
         public int ProductTypeId { get; set; }
         public ProductTypes ProductTypesId { get; set; }
         public int CustomersId { get; set; }
