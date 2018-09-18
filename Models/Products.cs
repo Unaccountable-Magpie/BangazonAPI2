@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 ﻿using BangazonAPI.Models;
+=======
+﻿//Author - Brett Shearin
+// Purpose - Reflects the Products table in the database and its values
+
+
+
+
+>>>>>>> master
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,14 +17,18 @@ namespace BangazonAPI.Controllers
 {
     public class Products
     {
-        [Key]
-        public int Id { get; set; }
-
         
+        public int Id { get; set; }
+        
+<<<<<<< HEAD
 
         [Required]
         public int ProductTypesId { get; set; }
         public ProductTypes ProductTypes { get; set; }
+=======
+        public int ProductTypeId { get; set; }
+        public ProductTypes ProductTypesId { get; set; }
+>>>>>>> master
         public int CustomersId { get; set; }
         public Customers Customer { get; set; }
         public int Price { get; set; }

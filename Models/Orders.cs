@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ﻿using BangazonAPI.Controllers;
+=======
+﻿//Author: Austin Gorman
+//Purpose: To reference the Orders table and it's values
+
+>>>>>>> master
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,10 +14,8 @@ namespace BangazonAPI.Models
 {
     public class Orders
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
         public int CustomersId { get; set; }
         public Customers Customers { get; set; }
         public int? PaymentTypesId { get; set; }
