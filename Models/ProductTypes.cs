@@ -20,6 +20,7 @@ namespace BangazonAPI.Models
 
         
         public string Name { get; set; }
+        public Boolean IsDeleted { get; set; }
         
 
 
