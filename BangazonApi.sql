@@ -60,17 +60,17 @@ CREATE TABLE Computers (
 INSERT INTO Computers
 (DatePurchased, DecommissionedDate, Malfunctioned, IsDeleted)
 VALUES
-('2005-7-7', '2004-6-6', 0, 1);
+('2005-7-7', '2004-6-6', 0, 0);
 
 INSERT INTO Computers
 (DatePurchased, DecommissionedDate, Malfunctioned, IsDeleted)
 VALUES
-('2008-7-7', '2009-6-6', 1, 1);
+('2008-7-7', '2009-6-6', 1, 0);
 
 INSERT INTO Computers
 (DatePurchased, DecommissionedDate, Malfunctioned, IsDeleted)
 VALUES
-('2010-8-7', '2010-8-6', 0, 1);
+('2010-8-7', '2010-8-6', 0, 0);
 
 CREATE TABLE Departments (
     Id  INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -83,17 +83,17 @@ CREATE TABLE Departments (
 INSERT INTO Departments
 (Name, Budget, IsDeleted)
 VALUES
-('Accounting', '12,000', 1);
+('Accounting', '12,000', 0);
 
 INSERT INTO Departments
 (Name, Budget, IsDeleted)
 VALUES
-('Sales', '50,000', 1);
+('Sales', '50,000', 0);
 
 INSERT INTO Departments
 (Name, Budget, IsDeleted)
 VALUES
-('IT', '70,000', 1);
+('IT', '70,000', 0);
 
 CREATE TABLE Employees (
     Id    INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -114,12 +114,12 @@ VALUES
 INSERT INTO Employees
 (FirstName, LastName, Supervisor, DepartmentsId, IsDeleted)
 VALUES
-('Pablo', 'Lopez', 0, 1, 1);
+('Pablo', 'Lopez', 0, 1, 0);
 
 INSERT INTO Employees
 (FirstName, LastName, Supervisor, DepartmentsId, IsDeleted)
 VALUES
-('Jesus', 'Sanchez', 1, 3, 1);
+('Jesus', 'Sanchez', 1, 3, 0);
 
 CREATE TABLE TrainingPrograms (
     Id  INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -134,7 +134,7 @@ CREATE TABLE TrainingPrograms (
 INSERT INTO TrainingPrograms
 (ProgramName, MaxAttendees, StartDate, EndDate, IsDeleted)
 VALUES
-('Anger Management', 25, '2017-2-12', '2017-2-17', 1);
+('Anger Management', 25, '2017-2-12', '2017-2-17', 0);
 
 INSERT INTO TrainingPrograms
 (ProgramName, MaxAttendees, StartDate, EndDate, IsDeleted)
@@ -144,7 +144,7 @@ VALUES
 INSERT INTO TrainingPrograms
 (ProgramName, MaxAttendees, StartDate, EndDate, IsDeleted)
 VALUES
-('Bar Tending', 20, '2018-4-12', '2018-4-19', 1);
+('Bar Tending', 20, '2018-4-12', '2018-4-19', 0);
 
 CREATE TABLE EmployeeComputers (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -209,7 +209,7 @@ CREATE TABLE Customers (
 INSERT INTO Customers
 (FirstName, LastName, DateCreated, LastActivity, IsDeleted)
 VALUES
-('Scuba', 'Steve', '2017-4-12', '2018-4-19', 1);
+('Scuba', 'Steve', '2017-4-12', '2018-4-19', 0);
 
 INSERT INTO Customers
 (FirstName, LastName, DateCreated, LastActivity, IsDeleted)
@@ -219,7 +219,7 @@ VALUES
 INSERT INTO Customers
 (FirstName, LastName, DateCreated, LastActivity, IsDeleted)
 VALUES
-('Pretty', 'Pete', '2012-4-12', '2018-2-10', 1);
+('Pretty', 'Pete', '2012-4-12', '2018-2-10', 0);
 
 CREATE TABLE PaymentTypes (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -234,17 +234,17 @@ CREATE TABLE PaymentTypes (
 INSERT INTO PaymentTypes
 (Name, AccountNumber, CustomersId, IsDeleted)
 VALUES
-('Visa', 3324, 2, 1);
+('Visa', 3324, 2, 0);
 
 INSERT INTO PaymentTypes
 (Name, AccountNumber, CustomersId, IsDeleted)
 VALUES
-('MasterCard', 3327, 1, 1);
+('MasterCard', 3327, 1, 0);
 
 INSERT INTO PaymentTypes
 (Name, AccountNumber, CustomersId, IsDeleted)
 VALUES
-('PayPal', 3301, 3, 1);
+('PayPal', 3301, 3, 0);
 
 CREATE TABLE Orders (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -281,17 +281,17 @@ CREATE TABLE ProductTypes (
 INSERT INTO ProductTypes
 (Name, IsDeleted)
 VALUES
-('Beauty', 1);
+('Beauty', 0);
 
 INSERT INTO ProductTypes
 (Name, IsDeleted)
 VALUES
-('Home', 1);
+('Home', 0);
 
 INSERT INTO ProductTypes
 (Name, IsDeleted)
 VALUES
-('Auto', 1);
+('Auto', 0);
 
 CREATE TABLE Products (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -310,7 +310,7 @@ CREATE TABLE Products (
 INSERT INTO Products
 (Price, Title, Description, Quantity, CustomersId, ProductTypesId, IsDeleted)
 VALUES
-(7, 'Goat Milk Soap', 'Smells like lavender', 45, 1, 1, 1);
+(7, 'Goat Milk Soap', 'Smells like lavender', 45, 1, 1, 0);
 
 INSERT INTO Products
 (Price, Title, Description, Quantity, CustomersId, ProductTypesId, IsDeleted)
@@ -320,7 +320,7 @@ VALUES
 INSERT INTO Products
 (Price, Title, Description, Quantity, CustomersId, ProductTypesId, IsDeleted)
 VALUES
-(50, 'Night Stand', 'One Night Stand', 15, 2, 2, 1);
+(50, 'Night Stand', 'One Night Stand', 15, 2, 2, 0);
 
 CREATE TABLE ProductOrders (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
