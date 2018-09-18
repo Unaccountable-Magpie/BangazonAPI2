@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-
+//Authors: Jewel Ramirez
+//Purpose: To reflect the EmployeeComputers table in the database and all its values
 namespace BangazonAPI.Models
 {
     public class EmployeeComputers
@@ -20,12 +21,12 @@ namespace BangazonAPI.Models
         
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? AssignmentEndDate { get; set; }
+        public DateTime? AssignmentEndDate { get; set; } // ? means that the variable can be null
 
         [Required]
         public int EmployeesId { get; set; }
         public Employees Employees { get; set; }
-        public int ComputersId { get; set; } // ? means that the variable can be null
+        public int ComputersId { get; set; } 
         public Computers Computers { get; set; }
     }
 }
