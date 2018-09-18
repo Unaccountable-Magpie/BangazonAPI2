@@ -1,4 +1,5 @@
-﻿
+﻿//Author: Austin Gorman
+//Purpose: To reference the Departments table and it's values
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,10 +9,8 @@ namespace BangazonAPI.Models
 {
     public class Departments
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
         public string Budget { get; set; }
         public string Name { get; set; }
 
