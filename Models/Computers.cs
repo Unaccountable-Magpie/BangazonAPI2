@@ -31,6 +31,7 @@ namespace BangazonAPI.Models
         
         public Boolean Malfunctioned { get; set; }
 
+        public Boolean IsDeleted { get; set; }
 
     }
 }
