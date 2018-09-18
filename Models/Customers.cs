@@ -14,6 +14,7 @@ namespace BangazonAPI.Models
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Boolean IsDeleted { get; set; }
 
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
