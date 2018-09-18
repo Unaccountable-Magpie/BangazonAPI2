@@ -7,7 +7,7 @@ namespace BangazonAPI.Models
 {
     public class Employees
     {
-      
+
         public int Id { get; set; }
 
         public int DepartmentsId { get; set; }
