@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Author - Brett Shearin
+// Purpose - Reflects the Products table in the database and its values
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,12 +13,9 @@ namespace BangazonAPI.Models
 {
     public class Products
     {
-        [Key]
-        public int Id { get; set; }
-
         
-
-        [Required]
+        public int Id { get; set; }
+        
         public int ProductTypeId { get; set; }
         public ProductTypes ProductTypesId { get; set; }
         public int CustomersId { get; set; }
