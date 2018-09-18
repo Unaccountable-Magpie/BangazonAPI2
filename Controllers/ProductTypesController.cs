@@ -68,7 +68,7 @@ namespace BangazonAPI.Controllers
         public async Task<IActionResult> Post([FromBody] ProductTypes ProductTypes)
         {
             string sql = $@"INSERT INTO ProductTypes
-                (Name, IsDeleted)
+                (Name)
                 VALUES
                 ('{ProductTypes.Name}');
                 select MAX(Id) from ProductTypes";
@@ -104,7 +104,7 @@ namespace BangazonAPI.Controllers
             }
             catch (Exception)
             {
-                if (!PaymentTypesExists(id))
+                if (!ProductTypesExists(id))
                 {
                     return NotFound();
                 }
@@ -121,23 +121,46 @@ namespace BangazonAPI.Controllers
         {
             string sql = $@"DELETE From ProductTypes WHERE Id = {id}";
 
-            using (IDbConnection conn = Connection)
+            try
             {
-                int rowsAffected = await conn.ExecuteAsync(sql);
-                if (rowsAffected > 0)
+                using (IDbConnection conn = Connection)
                 {
-                    return new StatusCodeResult(StatusCodes.Status204NoContent);
+                    int rowsAffected = await conn.ExecuteAsync(sql);
+                    if (rowsAffected > 0)
+                    {
+                        return new StatusCodeResult(StatusCodes.Status204NoContent);
+                    }
+                    throw new Exception("No rows affected");
                 }
-                throw new Exception("No rows affected");
+            }
+            catch (Exception)
+            {
+                if (ProductsExists(id))
+                {
+                    return new StatusCodeResult(StatusCodes.Status405MethodNotAllowed);
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
 
-        private bool PaymentTypesExists(int id)
+        private bool ProductTypesExists(int id)
         {
             string sql = $"SELECT Id, Name FROM ProductTypes WHERE Id = {id}";
             using (IDbConnection conn = Connection)
             {
-                return conn.Query<PaymentTypes>(sql).Count() > 0;
+                return conn.Query<ProductTypes>(sql).Count() > 0;
+            }
+        }
+
+        private bool ProductsExists(int id)
+        {
+            string sql = $"SELECT * FROM Products p WHERE p.ProductTypesId = {id}";
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<Products>(sql).Count() > 0;
             }
         }
     }
