@@ -43,8 +43,8 @@ namespace BangazonAPI.Controllers
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = $@"SELECT * FROM ProductTypes;
-                    SELECT * FROM ProductTypes WHERE IsDeleted = 'false'";
+                string sql = $@"SELECT * FROM ProductTypes WHERE IsDeleted = 'false';
+                            SELECT * FROM ProductTypes";
 
                 var ProductTypesQuery = await conn.QueryAsync<ProductTypes>(sql);
                 return Ok(ProductTypesQuery);
