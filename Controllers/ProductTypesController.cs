@@ -43,8 +43,7 @@ namespace BangazonAPI.Controllers
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = $@"SELECT * FROM ProductTypes WHERE IsDeleted = 'false';
-                            SELECT * FROM ProductTypes";
+                string sql = $@"SELECT * FROM ProductTypes";
 
                 var ProductTypesQuery = await conn.QueryAsync<ProductTypes>(sql);
                 return Ok(ProductTypesQuery);
@@ -71,7 +70,7 @@ namespace BangazonAPI.Controllers
             string sql = $@"INSERT INTO ProductTypes
                 (Name, IsDeleted)
                 VALUES
-                ('{ProductTypes.Name}', '{ProductTypes.IsDeleted}');
+                ('{ProductTypes.Name}');
                 select MAX(Id) from ProductTypes";
 
             using (IDbConnection conn = Connection)
@@ -88,8 +87,7 @@ namespace BangazonAPI.Controllers
         {
             string sql = $@"
             UPDATE ProductTypes
-            SET Name = '{ProductTypes.Name}',
-                IsDeleted = '{ProductTypes.IsDeleted}'
+            SET Name = '{ProductTypes.Name}'
             WHERE Id = {id}";
 
             try
@@ -121,8 +119,7 @@ namespace BangazonAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
-            string sql = $@"DELETE From ProductTypes WHERE IsDeleted = 'true';
-                DELETE From ProductTypes WHERE Id = {id}";
+            string sql = $@"DELETE From ProductTypes WHERE Id = {id}";
 
             using (IDbConnection conn = Connection)
             {
@@ -137,7 +134,7 @@ namespace BangazonAPI.Controllers
 
         private bool PaymentTypesExists(int id)
         {
-            string sql = $"SELECT Id, Name, IsDeleted FROM ProductTypes WHERE Id = {id}";
+            string sql = $"SELECT Id, Name FROM ProductTypes WHERE Id = {id}";
             using (IDbConnection conn = Connection)
             {
                 return conn.Query<PaymentTypes>(sql).Count() > 0;
