@@ -22,6 +22,8 @@ namespace BangazonAPI.Models
         public Customers Customer { get; set; }
         public string Name { get; set; }
         public int AccountNumber { get; set; }
+        public Boolean IsDeleted { get; set; }
+      
 
 
     }
