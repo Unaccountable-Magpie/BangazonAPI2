@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-﻿using BangazonAPI.Controllers;
-=======
+
 ﻿//Author: Austin Gorman
 //Purpose: To reference the ProductOrders table and it's values
 
->>>>>>> master
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

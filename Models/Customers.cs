@@ -1,11 +1,8 @@
-<<<<<<< HEAD
-﻿
-using BangazonAPI.Controllers;
-=======
+
 ﻿//Author: Austin Gorman
 //Purpose: To reference the Customers table and it's values
 
->>>>>>> master
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +16,7 @@ namespace BangazonAPI.Models
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Boolean IsDeleted { get; set; }
 
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

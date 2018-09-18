@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BangazonAPI.Controllers
+namespace BangazonAPI.Models
 {
     public class Products
     {
@@ -21,7 +21,7 @@ namespace BangazonAPI.Controllers
         
 
         public int ProductTypesId { get; set; }
-        public ProductTypes ProductType { get; set; }
+        public ProductTypes ProductTypes { get; set; }
 
         public int CustomersId { get; set; }
         public Customers Customer { get; set; }
@@ -29,6 +29,7 @@ namespace BangazonAPI.Controllers
         public string Title { get; set; } // ? means that the variable can be null
         public string Description { get; set; }
         public int Quantity { get; set; }
+        public Boolean IsDeleted { get; set; }
 
 
     }
