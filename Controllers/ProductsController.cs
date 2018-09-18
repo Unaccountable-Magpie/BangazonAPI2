@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using BangazonAPI.Models;
 using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -64,20 +65,103 @@ namespace BangazonAPI.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Products Products)
         {
+            string sql = $@"INSERT INTO Products
+            ( Price, Title, Description, Quantity, CustomersId, ProductTypesId)
+            VALUES
+            ( `{Products.Price}`, {Products.Title}`, {Products.Description}`, {Products.Quantity}`, 
+            {Products.CustomersId}`, {Products.ProductTypesId}); 
+            SELECT MAX(Id) from Products";
+
+            using (IDbConnection conn = Connection)
+            {
+                var newProductsId = (await conn.QueryAsync<int>(sql)).Single();
+                Products.Id = newProductsId;
+                return CreatedAtRoute("GetProducts", new { id = newProductsId }, Products);
+            }
         }
+
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Products Products)
         {
+            string sql = $@"
+            UPDATE Products
+            SET
+                CustomersId = {Products.CustomersId},
+                ProductTypesId = {Products.ProductTypesId}
+                Price = {Products.Price}
+                Title = {Products.Title}
+                Description = {Products.Description}
+                Quantity - {Products.Quantity}
+            WHERE Id = {id}";
+
+            try
+            {
+                using (IDbConnection conn = Connection)
+                {
+                    int rowsAffected = await conn.ExecuteAsync(sql);
+                    if (rowsAffected > 0)
+                    {
+                        return new StatusCodeResult(StatusCodes.Status204NoContent);
+                    }
+                    throw new Exception("No rows affected");
+                }
+            }
+            catch (Exception)
+            {
+                if (!ProductsExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
+
+        private bool CustomerExists(int id)
+        {
+            string sql = $"SELECT Id, Name, Language FROM Customer WHERE Id = {id}";
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<Customers>(sql).Count() > 0;
+            }
+        }
+
+
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            string sql = $@"DELETE FROM Products WHERE Id = {id}";
+
+            using (IDbConnection conn = Connection)
+            {
+                int rowsAffected = await conn.ExecuteAsync(sql);
+                if (rowsAffected > 0)
+                {
+                    return new StatusCodeResult(StatusCodes.Status204NoContent);
+                }
+                throw new Exception("No rows affected");
+            }
+
+        }
+
+        private bool ProductsExists(int id)
+        {
+            string sql = $"SELECT CustomersId, ProductTypesId, Price, Title, Description, Quantity FROM Products WHERE Id = {id}";
+            using (IDbConnection conn = Connection)
+
+            {
+                return conn.Query<Products>(sql).Count() > 0;
+            }
         }
     }
 }
+
+
