@@ -121,7 +121,7 @@ namespace BangazonAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
-            string sql = $@"DELETE From ProductTypes WHERE IsDeleted = 'true',
+            string sql = $@"DELETE From ProductTypes WHERE IsDeleted = 'true';
                 DELETE From ProductTypes WHERE Id = {id}";
 
             using (IDbConnection conn = Connection)
