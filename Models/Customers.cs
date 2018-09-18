@@ -15,12 +15,7 @@ namespace BangazonAPI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-
-        [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastActivity { get; set; }
 
         List<Products> ProductsList = new List<Products>();
