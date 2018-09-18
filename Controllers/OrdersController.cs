@@ -1,4 +1,14 @@
-﻿using Dapper;
+﻿//Author: Austin Gorman
+//Purpose: To get, post, put and delete items from the orders table
+//Methods:
+//Get: Gets all orders
+//Get One: Gets one order
+//Post: Adds new order
+//Put: Edits existing order
+//Delete: Removes an order and also removes the ProductOrder joint table entry with a corresponding OrderID foreign key
+
+
+using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -44,7 +54,7 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        // GET: api/Orders/5
+        // GET ONE: api/Orders/5
         [HttpGet("{id}", Name = "GetOrders")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
