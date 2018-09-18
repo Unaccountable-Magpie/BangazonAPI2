@@ -53,47 +53,45 @@ CREATE TABLE Computers (
     Id    INTEGER NOT NULL PRIMARY KEY IDENTITY,
     DatePurchased    DATE NOT NULL,
     DecommissionedDate    DATE NOT NULL,
-    Malfunctioned BIT NOT NULL,
-	IsDeleted BIT NOT NULL
+    Malfunctioned BIT NOT NULL
 );
 
 INSERT INTO Computers
-(DatePurchased, DecommissionedDate, Malfunctioned, IsDeleted)
+(DatePurchased, DecommissionedDate, Malfunctioned)
 VALUES
-('2005-7-7', '2004-6-6', 0, 0);
+('2005-7-7', '2004-6-6', 0 );
 
 INSERT INTO Computers
-(DatePurchased, DecommissionedDate, Malfunctioned, IsDeleted)
+(DatePurchased, DecommissionedDate, Malfunctioned )
 VALUES
-('2008-7-7', '2009-6-6', 1, 0);
+('2008-7-7', '2009-6-6', 1 );
 
 INSERT INTO Computers
-(DatePurchased, DecommissionedDate, Malfunctioned, IsDeleted)
+(DatePurchased, DecommissionedDate, Malfunctioned )
 VALUES
-('2010-8-7', '2010-8-6', 0, 0);
+('2010-8-7', '2010-8-6', 0 );
 
 CREATE TABLE Departments (
     Id  INTEGER NOT NULL PRIMARY KEY IDENTITY,
     Name varchar(80) NOT NULL,
-    Budget varchar(80) NOT NULL,
-	IsDeleted BIT NOT NULL
+    Budget varchar(80) NOT NULL
 
 );
 
 INSERT INTO Departments
-(Name, Budget, IsDeleted)
+(Name, Budget )
 VALUES
-('Accounting', '12,000', 0);
+('Accounting', '12,000' );
 
 INSERT INTO Departments
-(Name, Budget, IsDeleted)
+(Name, Budget )
 VALUES
-('Sales', '50,000', 0);
+('Sales', '50,000' );
 
 INSERT INTO Departments
-(Name, Budget, IsDeleted)
+(Name, Budget )
 VALUES
-('IT', '70,000', 0);
+('IT', '70,000' );
 
 CREATE TABLE Employees (
     Id    INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -101,25 +99,24 @@ CREATE TABLE Employees (
     LastName    varchar(80) NOT NULL,
     Supervisor BIT NOT NULL,
 	DepartmentsId INTEGER NOT NULL,
-	CONSTRAINT FK_Departments FOREIGN KEY(DepartmentsId) REFERENCES Departments(Id),
-	IsDeleted BIT NOT NULL
-
+	CONSTRAINT FK_Departments FOREIGN KEY(DepartmentsId) REFERENCES Departments(Id)
+	
 );
 
 INSERT INTO Employees
-(FirstName, LastName, Supervisor, DepartmentsId, IsDeleted)
+(FirstName, LastName, Supervisor, DepartmentsId )
 VALUES
-('Jose', 'Ramirez', 1, 1, 1);
+('Jose', 'Ramirez', 1, 1 );
 
 INSERT INTO Employees
-(FirstName, LastName, Supervisor, DepartmentsId, IsDeleted)
+(FirstName, LastName, Supervisor, DepartmentsId )
 VALUES
-('Pablo', 'Lopez', 0, 1, 0);
+('Pablo', 'Lopez', 0, 1 );
 
 INSERT INTO Employees
-(FirstName, LastName, Supervisor, DepartmentsId, IsDeleted)
+(FirstName, LastName, Supervisor, DepartmentsId )
 VALUES
-('Jesus', 'Sanchez', 1, 3, 0);
+('Jesus', 'Sanchez', 1, 3 );
 
 CREATE TABLE TrainingPrograms (
     Id  INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -127,24 +124,23 @@ CREATE TABLE TrainingPrograms (
     MaxAttendees INTEGER NOT NULL,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
-	IsDeleted BIT NOT NULL
-
+	
 );
 
 INSERT INTO TrainingPrograms
-(ProgramName, MaxAttendees, StartDate, EndDate, IsDeleted)
+(ProgramName, MaxAttendees, StartDate, EndDate )
 VALUES
-('Anger Management', 25, '2017-2-12', '2017-2-17', 0);
+('Anger Management', 25, '2017-2-12', '2017-2-17');
 
 INSERT INTO TrainingPrograms
-(ProgramName, MaxAttendees, StartDate, EndDate, IsDeleted)
+(ProgramName, MaxAttendees, StartDate, EndDate)
 VALUES
-('Boat Training', 20, '2017-4-12', '2017-4-19', 1);
+('Boat Training', 20, '2017-4-12', '2017-4-19');
 
 INSERT INTO TrainingPrograms
-(ProgramName, MaxAttendees, StartDate, EndDate, IsDeleted)
+(ProgramName, MaxAttendees, StartDate, EndDate)
 VALUES
-('Bar Tending', 20, '2018-4-12', '2018-4-19', 0);
+('Bar Tending', 20, '2018-4-12', '2018-4-19');
 
 CREATE TABLE EmployeeComputers (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -203,23 +199,23 @@ CREATE TABLE Customers (
     LastName    varchar(80) NOT NULL,
     DateCreated DATE NOT NULL,
     LastActivity DATE NOT NULL,
-	IsDeleted BIT NOT NULL
+
 );
 
 INSERT INTO Customers
-(FirstName, LastName, DateCreated, LastActivity, IsDeleted)
+(FirstName, LastName, DateCreated, LastActivity )
 VALUES
-('Scuba', 'Steve', '2017-4-12', '2018-4-19', 0);
+('Scuba', 'Steve', '2017-4-12', '2018-4-19' );
 
 INSERT INTO Customers
-(FirstName, LastName, DateCreated, LastActivity, IsDeleted)
+(FirstName, LastName, DateCreated, LastActivity )
 VALUES
-('Sassy', 'Sally', '2015-4-12', '2017-8-10', 1);
+('Sassy', 'Sally', '2015-4-12', '2017-8-10' );
 
 INSERT INTO Customers
-(FirstName, LastName, DateCreated, LastActivity, IsDeleted)
+(FirstName, LastName, DateCreated, LastActivity )
 VALUES
-('Pretty', 'Pete', '2012-4-12', '2018-2-10', 0);
+('Pretty', 'Pete', '2012-4-12', '2018-2-10' );
 
 CREATE TABLE PaymentTypes (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -248,7 +244,6 @@ VALUES
 
 CREATE TABLE Orders (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
-	OrderCompleted BIT NOT NULL,
 	CustomersId INTEGER NOT NULL,
 	PaymentTypesId INTEGER,
      CONSTRAINT FK_CustomerOrders FOREIGN KEY(CustomersId) REFERENCES Customers(Id),
@@ -257,41 +252,40 @@ CREATE TABLE Orders (
 );
 
 INSERT INTO Orders
-(OrderCompleted, CustomersId, PaymentTypesId)
+(CustomersId, PaymentTypesId)
 VALUES
-(1, 1, 3);
+( 1, 3);
 
 INSERT INTO Orders
-(OrderCompleted, CustomersId, PaymentTypesId)
+( CustomersId, PaymentTypesId)
 VALUES
-(1, 2, 2);
+( 2, 2);
 
 INSERT INTO Orders
-(OrderCompleted, CustomersId, PaymentTypesId)
+( CustomersId, PaymentTypesId)
 VALUES
-(1, 3, 1);
+( 3, 1);
 
 CREATE TABLE ProductTypes (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
     Name  varchar(80) NOT NULL,
-    IsDeleted BIT NOT NULL
-
+    
 );
 
 INSERT INTO ProductTypes
-(Name, IsDeleted)
+(Name )
 VALUES
-('Beauty', 0);
+('Beauty');
 
 INSERT INTO ProductTypes
-(Name, IsDeleted)
+(Name)
 VALUES
-('Home', 0);
+('Home');
 
 INSERT INTO ProductTypes
-(Name, IsDeleted)
+(Name)
 VALUES
-('Auto', 0);
+('Auto');
 
 CREATE TABLE Products (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -303,24 +297,23 @@ CREATE TABLE Products (
 	ProductTypesId INTEGER NOT NULL,
      CONSTRAINT FK_CustomerProducts FOREIGN KEY(CustomersId) REFERENCES Customers(Id),
     CONSTRAINT FK_ProductTypeProducts FOREIGN KEY(ProductTypesId) REFERENCES ProductTypes(Id),
-	IsDeleted BIT NOT NULL
-
+	
 );
 
 INSERT INTO Products
-(Price, Title, Description, Quantity, CustomersId, ProductTypesId, IsDeleted)
+(Price, Title, Description, Quantity, CustomersId, ProductTypesId)
 VALUES
-(7, 'Goat Milk Soap', 'Smells like lavender', 45, 1, 1, 0);
+(7, 'Goat Milk Soap', 'Smells like lavender', 45, 1, 1);
 
 INSERT INTO Products
-(Price, Title, Description, Quantity, CustomersId, ProductTypesId, IsDeleted)
+(Price, Title, Description, Quantity, CustomersId, ProductTypesId)
 VALUES
-(12, 'Driver Seat Cover', 'Super fluffy seat cover', 15, 2, 3, 1);
+(12, 'Driver Seat Cover', 'Super fluffy seat cover', 15, 2, 3);
 
 INSERT INTO Products
-(Price, Title, Description, Quantity, CustomersId, ProductTypesId, IsDeleted)
+(Price, Title, Description, Quantity, CustomersId, ProductTypesId)
 VALUES
-(50, 'Night Stand', 'One Night Stand', 15, 2, 2, 0);
+(50, 'Night Stand', 'One Night Stand', 15, 2, 2);
 
 CREATE TABLE ProductOrders (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
