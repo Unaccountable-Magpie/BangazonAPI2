@@ -1,7 +1,7 @@
 ﻿//Author: Austin Gorman
 //Purpose: To get, post, put and delete items from the orders table
 //Methods:
-//Get: Gets all orders
+//Get: Gets all orders 
 //Get One: Gets one order
 //Post: Adds new order
 //Put: Edits existing order
@@ -41,17 +41,28 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        // GET: api/Orders
+        // GET api/orders?completed=false
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string completed)
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = $"SELECT * FROM Orders";
+                string sql = "SELECT * FROM Orders";
 
-                var AllOrders = (await conn.QueryAsync<Orders>(sql));
-                return Ok(AllOrders);
+                if (completed != null && completed.Contains("true"))
+                {
+                    sql += $" WHERE [Orders].PaymentTypesId IS NOT NULL";
+                }
+                if (completed != null && completed.Contains("false"))
+                {
+                    sql += $" WHERE [Orders].PaymentTypesId IS NULL";
+                }  
+
+                var OrdersCompleted = await conn.QueryAsync<Orders>(sql);
+                return Ok(OrdersCompleted);
+
             }
+
         }
 
         // GET ONE: api/Orders/5

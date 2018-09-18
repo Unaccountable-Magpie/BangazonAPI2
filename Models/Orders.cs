@@ -12,7 +12,6 @@ namespace BangazonAPI.Models
     {
         public int Id { get; set; }
 
-        public bool OrderCompleted { get; set; }
         public int CustomersId { get; set; }
         public Customers Customers { get; set; }
         public int? PaymentTypesId { get; set; }
