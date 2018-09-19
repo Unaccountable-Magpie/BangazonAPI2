@@ -26,6 +26,7 @@ namespace BangazonAPI.Models
         {
             get
             {
+
                 return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             }
         }
