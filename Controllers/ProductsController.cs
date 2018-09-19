@@ -70,8 +70,7 @@ namespace BangazonAPI.Controllers
             string sql = $@"INSERT INTO Products
             ( Price, Title, Description, Quantity, CustomersId, ProductTypesId)
             VALUES
-            ( `{Products.Price}`, {Products.Title}`, {Products.Description}`, {Products.Quantity}`, 
-            {Products.CustomersId}`, {Products.ProductTypesId}); 
+            ( `{Products.CustomersId}`, {Products.ProductTypesId}){Products.Price}`, {Products.Title}`, {Products.Description}`, {Products.Quantity}`); 
             SELECT MAX(Id) from Products";
 
             using (IDbConnection conn = Connection)
