@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Author - Jewel Ramirez
+//Purpose - Reflects the PaymentType table in the database and its values. 
+//Has all the calls for getting information, adding information, updating, and deleted
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -63,9 +67,9 @@ namespace BangazonAPI.Controllers
         public async Task<IActionResult> Post([FromBody] PaymentTypes PaymentTypes)
         {
             string sql = $@"INSERT INTO PaymentTypes
-            (CustomersId, Name, AccountNumber)
+            (Name, AccountNumber, CustomersId, IsDeleted)
             VALUES
-            ('{PaymentTypes.CustomersId}', '{PaymentTypes.Name}','{PaymentTypes.AccountNumber}');
+            ('{PaymentTypes.Name}','{PaymentTypes.AccountNumber}','{PaymentTypes.CustomersId}','{PaymentTypes.IsDeleted}');
             select MAX(Id) from PaymentTypes";
 
             using (IDbConnection conn = Connection)
@@ -86,7 +90,8 @@ namespace BangazonAPI.Controllers
             SET 
                 Name = '{paymentTypes.Name}',
                 AccountNumber = '{paymentTypes.AccountNumber}',
-                CustomersId = '{paymentTypes.CustomersId}'
+                CustomersId = '{paymentTypes.CustomersId}',
+               IsDeleted = '{paymentTypes.IsDeleted}'
             WHERE Id = {id}";
 
             try
