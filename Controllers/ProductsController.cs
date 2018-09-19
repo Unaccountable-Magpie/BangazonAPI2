@@ -1,4 +1,15 @@
-﻿using System;
+﻿//Author: Lauren Richert
+//Purpose: Get, post, put and delete things from the products table
+//Methods:
+//Get: Gets all products 
+//Get One: Gets a single product
+//Post: Adds a new product
+//Put: Edits an existing product
+//Delete: Deletes a product and also deletes the entry in the ProductOrder joint with a corresponding ProductId foreign key
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
