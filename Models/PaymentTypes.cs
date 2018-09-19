@@ -1,4 +1,4 @@
-﻿//Author - Brett Shearin
+﻿//Author - Jewel Ramirez
 //Purpose - Reflects the PaymentType table in the database and its values
 
 
