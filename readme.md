@@ -1,40 +1,52 @@
 # Building the Bangazon Platform API
 
-Welcome, new Bangazonians!
+ProductTypes Controller uses the ProductTypes & Products Model to run correctly. This controller allows you to Get a list of all objects
+from the ProductsTypes table within the API using the GET method. You are able to add a new object to the table using the Post method. Using 
+the PUT method will give you the access to update an object from the API. DELETE method will let you delete an object from the table inside the API
+ONLY if it isn't associated to a product from the Products table.
 
-Your job is to build out a .NET Web API that makes each resource in the Bangazon ERD available to application developers throughout the entire company.
+**Purpose: Get, Post, Put, and Delete information from the ProductTypes table
 
-1. Products
-1. Product types
-1. Customers
-1. Orders
-1. Payment types
-1. Employees
-1. Computers
-1. Training programs
-1. Departments
+**How it fits in context of the project: Allows the controller to access required information and other controllers that might need this information
 
-> **Pro tip:** You do not need to make a Controller for the join tables, because those aren't resources.
+**Specific Feature affected: Delete Method will only let you delete an object that has No association to a Product.
 
-Your product owner will provide you with a prioritized backlog of features for you to work on over the development sprint. The first version of the API will be completely open since we have not determined which authentication method we want to use yet.
+**How to test (Be thorough!):
 
-The only restriction on the API is that only requests from the `www.bangazon.com` domain should be allowed. Requests from that domain should be able to access every resource, and perform any operation a resource.
+1. Checkout to my branch ProductTypesController
 
-## Plan
+2. type start BangazonAPI.sln
 
-First, you need to plan. Your team needs to come to a consensus about the Bangazon ERD design. Once you feel you have consensus, you must get it approved by your manager before you begin writing code for the API.
+3. This will open the file inside Visual Studio and open ProductTypesController
 
-## Modeling
+4. Press IIS Express play button to start up the server, a window will open inside the browser. You will need to add /api/producttypes to end of the url in order to access my controller. Copy this address as you will need to paste inside Postman.
+You can also open Powershell, cd into the project, and type dotnet run. Once the project is running, you will be supplied a local host url. Copy this address and use inside Postman instead of the Visual Studio url if you choose.
+Only 1 option can be used at a time. You can not have the database running on both.
 
-Next, you need to author the Models needed for your API. Make sure that each model has the approprate foreign key relationship defined on it, either with a custom type or an `List<T>` to store many related things. The boilerplate code shows you one example - the relationship between `Order` and `OrderProduct`, which is 1 -> &#8734;. For every _OrderId_, it can be stored in the `OrderProduct` table many times.
+5. Open PostMan, and select GET
 
-## Database Management
+6. Copy that address from the browser inside there and press SEND
 
-Your team will need to decide on a file to be added to your repository to contain all of the SQL needed to build and seed your database. Perhaps a file named `bangazon.sql`.
+7. Select POST within PostMan
 
-If your database needs to be changed in any way, or you wish to add items to be seeded, the a teammate will need to modify the file, submit a PR, and each teammate will need to run it to rebuild the database with the new structure.
+8. Add a new JSON object, you will be using the header selections at the top & click on Body, select Raw, and change Text to JSON
+ex. { "Name": "Apparel"}
 
-## Controllers
+9. Rerun the GET and you should see a new object
 
-Now it's time to build the controllers that handle GET, POST, PUT, and DELETE operations on each resource. Make sure you read, and understand, the requirements in the issue tickets to you can use your ORM and SQL to return the correct data structure to client requests.
+10. Select PUT within PostMan
+
+11. Update one of the JSON objects, you will still need the same url but add /2 on the end of it, click on Body, select Raw, and change Text to JSON
+ex. { "id": 2, "name": "Toys"}
+
+12. Rerun the GET and you should see the updated object
+
+13. Select DELETE within PostMan
+
+14. Delete one of the JSON objects, you will still need the same url but add /3 on the end of it. This will give you a 405 Method Not Allowed error. You are not allowed to delete a Product Type that is associated with a Product.
+
+15. Delete one of the JSON objects, you will still need the same url but add /4 on the end of it(this should be the object that you created from your post). This will let you delete because there is
+no association with a Product.
+
+16. Rerun the GET and you shouldn't see that object because it was deleted
 
