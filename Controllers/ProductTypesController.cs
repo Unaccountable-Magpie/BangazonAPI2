@@ -1,9 +1,9 @@
 ﻿/*Purpose: Allows user to Get information stored inside the ProductTypes table,
-        Allows user to Post new information to the table with a new ProductTypes Id,
+        Allows user to Post new information to the table with a new ProductTypes Id automatically created by the system,
         Allows user to Put or update a ProductTypes Name by the associated Id,
-        Allows user to Delete a ProductTypes Name by the associated Id from the ProductTypes table*/
+        Allows user to Delete a ProductTypes Name by the associated Id from the ProductTypes table as long as it isn't associated to a product from the Products table*/
 //Author: Amanda Mitchell
-//Models: ProductTypes
+//Models: ProductTypes & Products
 
 using System;
 using System.Collections.Generic;
