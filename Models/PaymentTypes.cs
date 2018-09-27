@@ -12,6 +12,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BangazonAPI.Models
 {
     public class PaymentTypes
+
+
     {
 
         public int Id { get; set; }
@@ -23,6 +25,7 @@ namespace BangazonAPI.Models
 
      
         public Boolean IsDeleted { get; set; }
+
 
     }
 }
