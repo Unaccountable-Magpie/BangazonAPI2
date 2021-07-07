@@ -1,4 +1,5 @@
-﻿//Author: Austin Gorman
+
+//Author: Austin Gorman
 //Purpose: To reference the Orders table and it's values
 
 using System;
