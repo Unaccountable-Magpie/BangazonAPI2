@@ -26,34 +26,40 @@ namespace BangazonAPI.Models
         {
             get
             {
+
                 return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             }
         }
 
         /*
             GET /customers?q=test
-            GET /customers?_include=payments
+            GET /customers?_include=PaymentTypes
          */
         [HttpGet]
         public async Task<IActionResult> Get(string q, string _include)
         {
-            string sql = "";
+            string sql = "SELECT * FROM Customers";
 
-            if (_include != null && _include.Contains("payments"))
+            if (_include != null && _include.Contains("PaymentTypes"))
             {
-
+                sql += $" WHERE PaymentTypes='{_include}'";
             }
 
             if (q != null)
             {
+                sql += $"WHERE All ='{q}'";
+            }
 
+            if(_include != null && _include.Contains("Products"))
+            {
+                sql += $"WHERE Products='{_include}'";
             }
 
             Console.WriteLine(sql);
 
             using (IDbConnection conn = Connection)
             {
-                if (_include == "payments")
+                if (_include == "PaymentTypes")
                 {
                     Dictionary<int, Customers> customerPayments = new Dictionary<int, Customers>();
 
@@ -73,13 +79,16 @@ namespace BangazonAPI.Models
         }
 
         // GET /customers/5
-        [HttpGet("{id}", Name = "GetCustomer")]
+        [HttpGet("{id}", Name = "GetCustomers")]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
-            string sql = $"SELECT Id, Name, Language FROM Customer WHERE Id = {id}";
 
             using (IDbConnection conn = Connection)
             {
+            string sql = $"SELECT Id, FirstName, LastName, DateCreated   FROM Customers WHERE Id = {id}";
+
+               // var theSingleCustomer = (await conn.QueryAsync<Customers>(sql)).Single();
+
                 IEnumerable<Customers> customers = await conn.QueryAsync<Customers>(sql);
                 return Ok(customers);
             }
@@ -87,19 +96,19 @@ namespace BangazonAPI.Models
 
         // POST /customers
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Customers customer)
+        public async Task<IActionResult> Post([FromBody] Customers customers)
         {
             string sql = $@"INSERT INTO Customer
-            ()
+            (Id,FirstName,LastName,DateCreated,)
             VALUES
-            ();
-            select MAX(Id) from Customer;";
+            ('{customers.Id}','{customers.FirstName}','{customers.LastName}','{customers.DateCreated}');
+            select MAX(Id) from Customers;";
 
             using (IDbConnection conn = Connection)
             {
                 var customerId = (await conn.QueryAsync<int>(sql)).Single();
-                customer.Id = customerId;
-                return CreatedAtRoute("GetCustomer", new { id = customerId }, customer);
+                customers.Id = customerId;
+                return CreatedAtRoute("GetCustomer", new { id = customerId }, customers);
             }
         }
 
@@ -117,11 +126,11 @@ namespace BangazonAPI.Models
             verb is handled.
          */
         [HttpPut("{id}")]
-        public async Task<IActionResult> ChangeCustomer(int id, [FromBody] Customers customer)
+        public async Task<IActionResult> ChangeCustomer(int id, [FromBody] Customers customers)
         {
             string sql = $@"
-            UPDATE Customer
-            SET '
+            UPDATE Customers
+            SET Id = '{customers.Id}', FirstName = '{customers.FirstName}',LastName = '{customers.LastName}',DateCreated = '{customers.DateCreated}''
             WHERE Id = {id}";
 
             try
@@ -153,7 +162,7 @@ namespace BangazonAPI.Models
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            string sql = $@"DELETE FROM Customer WHERE Id = {id}";
+            string sql = $@"DELETE FROM Customers WHERE Id = {id}";
 
             using (IDbConnection conn = Connection)
             {
@@ -169,7 +178,7 @@ namespace BangazonAPI.Models
 
         private bool CustomerExists(int id)
         {
-            string sql = $"SELECT Id, Name, Language FROM Customer WHERE Id = {id}";
+            string sql = $"SELECT Id, FistName, LastName, DateCreated FROM Customers WHERE Id = {id}";
             using (IDbConnection conn = Connection)
             {
                 return conn.Query<Customers>(sql).Count() > 0;
